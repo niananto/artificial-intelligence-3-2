@@ -18,7 +18,7 @@ public class VAH3 extends VAH{
             }
         }
         unassignedVariables.remove(var);
-        System.out.println(unassignedVariables.size());
+//        System.out.println(unassignedVariables.size());
         return var;
     }
 }

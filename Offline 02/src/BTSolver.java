@@ -24,12 +24,12 @@ public class BTSolver extends CSP {
         boolean[] initialDomain = new boolean[N];
         System.arraycopy(var.domain, 0, initialDomain, 0, N);
 //        System.out.println(var + " " + Arrays.toString(var.domain));
-//        int value = var.getAValue();
-        int value = var.getAValueLeastConstraining(variables);
+        int value = var.getAValue();
+//        int value = var.getAValueLeastConstraining(variables);
         totalNodes++;
 
         while (value >= 0) {
-            System.out.println("Trying value " + (value + 1) + " for variable " + var);
+//            System.out.println("Trying value " + (value + 1) + " for variable " + var);
             Set<Variable> updatedVariables = update(variables, var);
 
             if (solver()) {
@@ -40,13 +40,13 @@ public class BTSolver extends CSP {
             }
 
 //            System.out.println(var + " " + Arrays.toString(var.domain));
-//            value = var.getAValue();
-            value = var.getAValueLeastConstraining(variables);
+            value = var.getAValue();
+//            value = var.getAValueLeastConstraining(variables);
             totalNodes++;
         }
         backtracks++;
 
-        System.out.println("No value found for " + var);
+//        System.out.println("No value found for " + var);
         var.domain = initialDomain;
         vah.addAVariable(var);
 

@@ -8,15 +8,17 @@ public class Main {
 
         int num = 0;
         assert listOfFiles != null;
-        for (File file : listOfFiles) {
-            if (!file.isFile()) continue;
+        for (File readFile : listOfFiles) {
+            if (!readFile.isFile()) continue;
 
             int N = 0;
             int[][] START = new int[0][];
             boolean[][] rowDomains = new boolean[0][];
             boolean[][] colDomains = new boolean[0][];
+            int[] rowForwardDegree = new int[0];
+            int[] colForwardDegree = new int[0];
             try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
+                BufferedReader br = new BufferedReader(new FileReader(readFile));
                 String lineOfFile;
                 int lineCount = 0;
 
@@ -26,10 +28,13 @@ public class Main {
                         START = new int[N][N];
                         rowDomains = new boolean[N][N];
                         colDomains = new boolean[N][N];
+                        rowForwardDegree = new int[N];
+                        colForwardDegree = new int[N]; // initialized to 0 by default
                         for (int i=0; i<N; i++) {
                             Arrays.fill(rowDomains[i], Boolean.TRUE);
                             Arrays.fill(colDomains[i], Boolean.TRUE);
                         }
+
                         lineCount++;
                         continue;
                     }
@@ -41,24 +46,30 @@ public class Main {
                         if (val >= 0) {
                             rowDomains[lineCount-1][val] = false;
                             colDomains[i][val] = false;
+                        } else {
+                            rowForwardDegree[lineCount-1]++;
+                            colForwardDegree[i]++;
                         }
                     }
                     lineCount++;
                 }
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
 
             Variable[][] variables = new Variable[N][N];
 //            VAH vah = new VAH1();
-            VAH vah = new VAH2();
+//            VAH vah = new VAH2();
 //            VAH vah = new VAH3();
 //            VAH vah = new VAH4();
-//            VAH vah = new VAH5();
+            VAH vah = new VAH5();
             for (int i=0; i<N; i++) {
                 for (int j=0; j<N; j++) {
                     if (START[i][j] == -1) {
-                        Variable v = new Variable(N, i, j, rowDomains[i], colDomains[j]);
+                        Variable v = new Variable(N, i, j, rowDomains[i], colDomains[j],
+                                rowForwardDegree[i]+colForwardDegree[j]+1);
+                                // +1 for the so that it doesn't get zero
+                                // it is eq to 2N+1 if the all the row and col are empty
                         vah.addAVariable(v);
                         variables[i][j] = v;
                     } else {
@@ -68,26 +79,44 @@ public class Main {
                 }
             }
 
-//            CSP csp = new BTSolver(N, vah, variables);
-            CSP csp = new FCSolver(N, vah, variables);
-            System.out.println("Solving " + file.getName());
+            CSP csp = new BTSolver(N, vah, variables);
+//            CSP csp = new FCSolver(N, vah, variables);
+            System.out.println("Solving " + readFile.getName());
             long startTime = System.nanoTime();
             boolean solved = csp.solverStart();
             long endTime = System.nanoTime();
 
-            Variable[][] solution = csp.solution;
-            if (solved && solutionCheck(solution)) {
-                System.out.println("Solved " + file.getName() + " in " + (endTime - startTime) / 1000000 + " ms");
-                System.out.println("Total Nodes: " + csp.totalNodes);
-                System.out.println("Backtracks: " + csp.backtracks);
-                for (int i=0; i<N; i++) {
-                    for (int j=0; j<N; j++) {
-                        System.out.print(solution[i][j].value + 1 + "\t");
+            // output buffered writer
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(
+                        "output/" + readFile.getName() + "_" + csp.getClass().getName() + "_" + vah.getClass().getName() + ".txt", true));
+                // print system time in hour and minute and second in bw
+                bw.write("System time: " + new java.util.Date() + "\n");
+
+                Variable[][] solution = csp.solution;
+                if (solved && solutionCheck(solution)) {
+//                    System.out.println("Solved " + readFile.getName() + " in " + (endTime - startTime) / 1000000 + " ms");
+                    bw.write("Solved " + readFile.getName() + " in " + (endTime - startTime) / 1000000 + " ms\n");
+//                    System.out.println("Total Nodes: " + csp.totalNodes);
+                    bw.write("Total Nodes: " + csp.totalNodes + "\n");
+//                    System.out.println("Backtracks: " + csp.backtracks);
+                    bw.write("Backtracks: " + csp.backtracks + "\n");
+                    for (int i=0; i<N; i++) {
+                        for (int j=0; j<N; j++) {
+                            System.out.print(solution[i][j].value + 1 + "\t");
+                            bw.write(solution[i][j].value + 1 + "\t");
+                        }
+                        System.out.println();
+                        bw.write("\n");
                     }
-                    System.out.println();
+                } else {
+                    System.out.println("Failed to solve " + readFile.getName());
+                    bw.write("Failed to solve " + readFile.getName() + "\n");
                 }
-            } else {
-                System.out.println("Failed to solve " + file.getName());
+
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             num++;

@@ -14,7 +14,7 @@ public class Variable {
     public int forwardDegreeCount;
 
     // for unassigned variables
-    public Variable(int N, int x, int y, boolean[] rowDomain, boolean[] colDomain) {
+    public Variable(int N, int x, int y, boolean[] rowDomain, boolean[] colDomain, int forwardDegreeCount) {
         this.N = N;
         this.x = x;
         this.y = y;
@@ -25,17 +25,17 @@ public class Variable {
         for (int i=0; i<N; i++) {
             this.domain[i] = rowDomain[i] && colDomain[i];
         }
-        this.forwardDegreeCount = 2*N + 1;
+        this.forwardDegreeCount = forwardDegreeCount;
     }
 
-    // for assigned variables
+    // for pre-assigned variables
     public Variable(int N, int x, int y, int value) {
         this.N = N;
         this.x = x;
         this.y = y;
         this.value = value;
         this.domain = null;
-        this.forwardDegreeCount = 2*N + 1;
+        this.forwardDegreeCount = -1;
     }
 
     public int getDomainCount() {
