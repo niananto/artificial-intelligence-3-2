@@ -1,0 +1,7 @@
+System time: Tue Jan 03 01:40:14 BDT 2023
+Solved d-03-01.txt in 0 ms
+Total Nodes: 4
+Backtracks: 0
+3	1	2	
+2	3	1	
+1	2	3	

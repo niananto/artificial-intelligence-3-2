@@ -1,0 +1,9 @@
+System time: Tue Jan 03 01:40:15 BDT 2023
+Solved d-05-02.txt in 0 ms
+Total Nodes: 9
+Backtracks: 0
+1	2	3	4	5	
+2	1	4	5	3	
+3	4	5	1	2	
+4	5	2	3	1	
+5	3	1	2	4	
