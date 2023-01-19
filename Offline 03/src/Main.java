@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Main {
     public static void main(String[] args) {
@@ -52,6 +51,5 @@ public class Main {
         Solver solver = new Solver(ich);
         solver.solve();
         solver.printSolution();
-//        solver.printSchedule();
     }
 }

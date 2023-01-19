@@ -47,14 +47,6 @@ public class Solver {
         }
     }
 
-    public int getTotalPenalty() {
-        return totalPenalty;
-    }
-
-    public int getTotalTimeslots() {
-        return totalTimeslots;
-    }
-
     public void printSolution() {
         System.out.println("Total penalty: " + totalPenalty);
         System.out.println("Total timeslots: " + totalTimeslots);
@@ -63,7 +55,6 @@ public class Solver {
     public void printSchedule() {
         for (int i = 1; i <= totalTimeslots; i++) {
             System.out.println("Timeslot " + i + ":");
-//            System.out.println(ch.getNodes().size());
             for (Node node : ch.getAllNodes()) {
                 if (node.getTimeSlot() == i) {
                     System.out.println(node.getCourse());
