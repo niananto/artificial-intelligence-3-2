@@ -2,13 +2,22 @@ import java.util.Objects;
 
 public class Edge {
     private int weight; // penalty
-    private Node node1;
-    private Node node2;
+    private final Node node1;
+    private final Node node2;
 
     public Edge(Node node1, Node node2) {
         this.weight = -1;
-        this.node1 = node1;
-        this.node2 = node2;
+
+        // make sure node1 < node2 always
+        // it helps in the hashCode() and equals() methods
+        // so that for different students, the same edge is not created twice
+        if (node1.getCourse().getCourseNo() < node2.getCourse().getCourseNo()) {
+            this.node1 = node1;
+            this.node2 = node2;
+        } else {
+            this.node1 = node2;
+            this.node2 = node1;
+        }
     }
 
     public int getWeight() {
@@ -40,12 +49,12 @@ public class Edge {
 
     @Override
     public int hashCode() {
-        return Objects.hash(weight, node1.getCourse().getCourseNo(), node2.getCourse().getCourseNo());
+        return Objects.hash(node1.getCourse().getCourseNo(), node2.getCourse().getCourseNo());
     }
 
     @Override
     public boolean equals(Object obj) {
-        Edge e = (Edge) obj;
-        return (weight == e.weight) && (node1 == e.node1) && (node2 == e.node2);
+        if (!(obj instanceof Edge e)) return false;
+        return /*(weight == e.weight) &&*/ (node1 == e.node1) && (node2 == e.node2);
     }
 }

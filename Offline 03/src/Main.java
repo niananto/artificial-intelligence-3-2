@@ -52,6 +52,6 @@ public class Main {
         Solver solver = new Solver(ich);
         solver.solve();
         solver.printSolution();
-        solver.printSchedule();
+//        solver.printSchedule();
     }
 }

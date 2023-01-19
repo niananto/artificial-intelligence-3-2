@@ -9,3 +9,7 @@
 2. Constraints are edges.
 3. Implemented the Hard Constraint hardcoded.
 4. LargestDegreeHeuristic done but not sure if it is the correct ans.
+
+***
+### To Do
+- [x] Same pair of nodes don't create another edge.
