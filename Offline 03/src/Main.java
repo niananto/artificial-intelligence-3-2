@@ -1,5 +1,8 @@
 import Classes.*;
 import Classes.ConstructiveHeuristic.*;
+import Classes.PerturbativeHeuristic.IPH;
+import Classes.PerturbativeHeuristic.KempeChainInterchange;
+import Classes.PerturbativeHeuristic.PairSwapOperator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,22 +10,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class Main {
-    private static void printSolution(int totalTimeslots, int totalStudents, Collection<Edge> edges) {
-        // calculate penalties
-        int totalPenalty = 0;
-        for (Edge edge : edges) {
-            int penalty = edge.calculatePenalty();
-            if (penalty >= 0) {
-                totalPenalty += penalty;
-            } else {
-                System.out.println("Error: penalty calculation error");
-            }
-        }
-
-        System.out.println("Total timeslots: " + totalTimeslots);
-        System.out.println("Average penalty: " + ((double)totalPenalty / (double)totalStudents));
-    }
-
     private static void solveToronto(String crsFile, String stuFile) {
         HashMap<Integer, Node> nodes = new HashMap<>();
         ArrayList<Edge> edges = new ArrayList<>(); // taking arraylist to allow duplicates
@@ -77,16 +64,29 @@ public class Main {
 //        ICH ich = new LargestEnrollment(nodes.values());
 //        ICH ich = new RandomOrdering(nodes.values());
 
-        Solver solver = new Solver(ich);
-        solver.solve();
-        printSolution(solver.getTotalTimeslots(), studentCount, edges);
+        // run constructive heuristic
+        Solver solver = new Solver(ich, studentCount, edges, nodes.values());
+        Solution solution = solver.solve();
+        System.out.println("After constructive heuristic:");
+        solution.printSolution();
+
+        // run local search (perturbation)
+        IPH iph = new KempeChainInterchange(solution);
+        solution = iph.runPerturbation();
+        System.out.println("After kempe-chain:");
+        solution.printSolution();
+
+//        iph = new PairSwapOperator(solution);
+//        solution = iph.runPerturbation();
+//        System.out.println("After pair-swap:");
+//        solution.printSolution();
     }
 
     public static void main(String[] args) {
         solveToronto("Toronto/car-f-92.crs", "Toronto/car-f-92.stu");
-        solveToronto("Toronto/car-s-91.crs", "Toronto/car-s-91.stu");
-        solveToronto("Toronto/kfu-s-93.crs", "Toronto/kfu-s-93.stu");
-        solveToronto("Toronto/tre-s-92.crs", "Toronto/tre-s-92.stu");
-        solveToronto("Toronto/yor-f-83.crs", "Toronto/yor-f-83.stu");
+//        solveToronto("Toronto/car-s-91.crs", "Toronto/car-s-91.stu");
+//        solveToronto("Toronto/kfu-s-93.crs", "Toronto/kfu-s-93.stu");
+//        solveToronto("Toronto/tre-s-92.crs", "Toronto/tre-s-92.stu");
+//        solveToronto("Toronto/yor-f-83.crs", "Toronto/yor-f-83.stu");
     }
 }

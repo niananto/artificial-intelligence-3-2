@@ -2,16 +2,22 @@ package Classes;
 
 import Classes.ConstructiveHeuristic.ICH;
 
+import java.util.*;
+
 public class Solver {
     private final ICH ch;
-    private int totalTimeslots;
+    private Solution solution;
 
-    public Solver(ICH ch) {
+    public Solver(ICH ch, int studentCount, Collection<Edge> edges, Collection<Node> nodes) {
         this.ch = ch;
-        this.totalTimeslots = 0;
+        ArrayList<Edge> newEdges = new ArrayList<>(edges);
+        Set<Node> newNodes = new HashSet<>(nodes);
+        this.solution = new Solution(studentCount, newEdges, newNodes);
     }
 
-    public void solve() {
+    public Solution solve() {
+        int totalTimeslots = 0;
+
         while (ch.hasNext()) {
             Node node = ch.getNext();
 
@@ -34,20 +40,8 @@ public class Solver {
             node.setTimeSlot(timeslot);
             totalTimeslots = Math.max(totalTimeslots, timeslot);
         }
-    }
 
-    public int getTotalTimeslots() {
-        return totalTimeslots;
-    }
-
-    public void printSchedule() {
-        for (int i = 1; i <= totalTimeslots; i++) {
-            System.out.println("Timeslot " + i + ":");
-            for (Node node : ch.getAllNodes()) {
-                if (node.getTimeSlot() == i) {
-                    System.out.println(node.getCourse());
-                }
-            }
-        }
+        solution.setTimeSlotCount(totalTimeslots);
+        return solution;
     }
 }
