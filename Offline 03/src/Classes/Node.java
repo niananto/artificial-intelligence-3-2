@@ -1,3 +1,6 @@
+package Classes;
+
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -6,11 +9,13 @@ public class Node {
     private final Course course;
     private final Set<Edge> edges;
     private int timeSlot;
+    private int saturationDegree; // for DSatur algorithm
 
     public Node(Course course) {
         this.course = course;
         edges = new HashSet<>();
         timeSlot = -1;
+        saturationDegree = 0;
     }
 
     public void addEdge(Edge edge) {
@@ -29,6 +34,22 @@ public class Node {
         return edges;
     }
 
+    public boolean hasNeighbour() {
+        return !edges.isEmpty();
+    }
+
+    public Collection<Node> getNeighbours() {
+        Collection<Node> neighbours = new HashSet<>();
+        for (Edge edge : edges) {
+            neighbours.add(edge.getOtherNode(this));
+        }
+        return neighbours;
+    }
+
+    public boolean hasTimeSlot() {
+        return timeSlot != -1;
+    }
+
     public int getTimeSlot() {
         return timeSlot;
     }
@@ -37,9 +58,21 @@ public class Node {
         this.timeSlot = timeSlot;
     }
 
+    public int getSaturationDegree() {
+        return saturationDegree;
+    }
+
+    public void increaseSaturationDegree() {
+        saturationDegree++;
+    }
+
+    public int getEnrollmentCount() {
+        return course.getNoOfStudents();
+    }
+
     @Override
     public String toString() {
-        return "Node{" +
+        return "Classes.Node{" +
                 "course=" + course +
                 ", timeSlot=" + timeSlot +
                 '}';

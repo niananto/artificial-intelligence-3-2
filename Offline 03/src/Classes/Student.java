@@ -1,20 +1,19 @@
-import java.util.ArrayList;
+package Classes;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Student {
-    private int studentNo;
-    private ArrayList<Course> courses;
+    private final int studentNo;
+    private final Set<Course> courses;
 
     public Student(int studentNo) {
         this.studentNo = studentNo;
-        courses = new ArrayList<>();
+        courses = new HashSet<>();
     }
 
     public void addCourse(Course course) {
         courses.add(course);
-    }
-
-    public void removeCourse(Course course) {
-        courses.remove(course);
     }
 
     @Override
@@ -24,9 +23,15 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Classes.Student{" +
                 "studentNo=" + studentNo +
                 ", noOfCourses=" + courses.size() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Student student)) return false;
+        return studentNo == student.studentNo;
     }
 }

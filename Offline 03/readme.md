@@ -13,3 +13,5 @@
 ***
 ### To Do
 - [x] Same pair of nodes don't create another edge.
+- [ ] Average penalty is still faulty. It's just adding one edge once but one edge may represent multiple students.
+- [ ] Also same edge is being calculated in the penalty twice.

@@ -1,15 +1,14 @@
+package Classes;
+
 import java.util.Objects;
 
 public class Edge {
-    private int weight; // penalty
     private final Node node1;
     private final Node node2;
 
     public Edge(Node node1, Node node2) {
-        this.weight = -1;
-
         // make sure node1 < node2 always
-        // it helps in the hashCode() and equals() methods
+        // it helps in the hashCode() methods
         // so that for different students, the same edge is not created twice
         if (node1.getCourse().getCourseNo() < node2.getCourse().getCourseNo()) {
             this.node1 = node1;
@@ -20,18 +19,24 @@ public class Edge {
         }
     }
 
-    public int getWeight() {
-        return weight;
-    }
+    public int calculatePenalty() {
+        int penalty = -1;
+        if (node1.hasTimeSlot() && node2.hasTimeSlot()) {
+            int n = Math.abs(node1.getTimeSlot() - node2.getTimeSlot());
+            if (n <= 5) {
+                penalty = (int) Math.pow(2, 5 - n);
+            } else {
+                penalty = 0;
+            }
+        }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+        return penalty;
     }
 
     @Override
     public String toString() {
-        return "Edge{" +
-                "weight=" + weight +
+        return "Classes.Edge{" +
+                "penalty=" + calculatePenalty() +
                 ", node1=" + node1 +
                 ", node2=" + node2 +
                 '}';
