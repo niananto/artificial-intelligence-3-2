@@ -16,3 +16,6 @@
 - [x] Average penalty is still faulty. It's just adding one edge once but one edge may represent multiple students.
 - [x] Also same edge is being calculated in the penalty twice.
 - [ ] Kempe Chain written. Don't know if it works for sure.
+- [ ] Didn't check hard constraint after Kempe Chain Interchange. Need to to do it.
+- [ ] 1000 iteration only for upgrade not all.
+- [ ] Pair Swap is taking two non adjacent nodes (randomly). Interchange their color and check for hard constraint. To do thise can take their individual Kempe chains and to check if they have only one node in them.
