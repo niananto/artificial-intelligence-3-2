@@ -1,6 +1,7 @@
 package Classes.ConstructiveHeuristic;
 
 import Classes.Node;
+import Classes.Random;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,6 +47,6 @@ public class LargestDegree implements ICH {
 
     private Node tieBreaker(ArrayList<Node> nodes) {
         // tie-break randomly
-        return nodes.get((int) (Math.random() * nodes.size()));
+        return nodes.get((int) (Random.nextDouble() * nodes.size()));
     }
 }

@@ -1,6 +1,7 @@
 package Classes.ConstructiveHeuristic;
 
 import Classes.Node;
+import Classes.Random;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -75,7 +76,7 @@ public class SaturationDegree implements ICH {
             return largestDegreeNodes.get(0);
         } else {
             // further tie-break randomly
-            return largestDegreeNodes.get((int) (Math.random() * largestDegreeNodes.size()));
+            return largestDegreeNodes.get((int) (Random.nextDouble() * largestDegreeNodes.size()));
         }
     }
 }

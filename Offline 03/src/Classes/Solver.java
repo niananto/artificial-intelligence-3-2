@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Solver {
     private final ICH ch;
-    private Solution solution;
+    private final Solution solution;
 
     public Solver(ICH ch, int studentCount, Collection<Edge> edges, Collection<Node> nodes) {
         this.ch = ch;

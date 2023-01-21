@@ -1,6 +1,7 @@
 package Classes.ConstructiveHeuristic;
 
 import Classes.Node;
+import Classes.Random;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +28,7 @@ public class RandomOrdering implements Classes.ConstructiveHeuristic.ICH {
     public Node getNext() {
         // get a random node from chSkeleton
         ArrayList<Node> nodes = new ArrayList<>(chSkeleton.getNodes());
-        Node toBeReturned = nodes.get((int) (Math.random() * nodes.size()));
+        Node toBeReturned = nodes.get((int) (Random.nextDouble() * nodes.size()));
         chSkeleton.removeNode(toBeReturned);
         return toBeReturned;
     }

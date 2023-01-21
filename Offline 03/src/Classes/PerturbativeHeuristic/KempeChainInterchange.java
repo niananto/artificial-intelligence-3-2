@@ -1,6 +1,7 @@
 package Classes.PerturbativeHeuristic;
 
 import Classes.Node;
+import Classes.Random;
 import Classes.Solution;
 
 import java.util.ArrayList;
@@ -8,44 +9,36 @@ import java.util.List;
 
 public class KempeChainInterchange implements IPH {
     private final Solution solution;
-    private final List<KempeChain> kempeChains;
 
     public KempeChainInterchange(Solution prevSolution) {
         this.solution = new Solution(prevSolution);
-        this.kempeChains = new ArrayList<>();
     }
 
     @Override
     public Solution runPerturbation() {
-        // create kempechains
-        for (int i=1; i<=solution.getTimeSlotCount(); i++) {
-            for (int j=1+1; j<=solution.getTimeSlotCount(); j++) {
-                KempeChain kempeChain = new KempeChain(i, j);
-                for (Node node : solution.getNodes()) {
-                    if (node.getTimeSlot() == i || node.getTimeSlot() == j) {
-                        kempeChain.addNode(node);
-                    }
-                }
-                kempeChains.add(kempeChain);
-            }
-        }
+        // should run kempe chain interchange minimum 1000 times
+        // as long as it is reducing penalty
+        for (int i=0; i<5; i++) {
+            // take a random node
+            // make the kempe chain from that
+            // interchange the kempe chain
+            // if it is not maintaining hard constraint or penalty is increasing, undo the interchange
+            // else continue
+            Node node = solution.getNodes().stream().toList().get((int) (Random.nextDouble() * solution.getNodes().size()));
 
-        // should run kempe chain interchange minimum 1000 times as long as it is reducing penalty)
-        for (int i=0; i<5; ) {
-            // Take a particular kempe chain and swap the colors of all vertices
-            KempeChain kempeChain = kempeChains.get((int) (Math.random() * kempeChains.size()));
+            // iterate over its neighbours and make kempe chains for all of them
+            for (Node neighbor : node.getNeighbours()) {
+                KempeChain kempeChain = new KempeChain(node, neighbor);
 
-            int oldPenalty = solution.calculatePenalty();
-            kempeChain.interchange();
-            int newPenalty = solution.calculatePenalty();
-
-            if (!solution.maintainsHardConstraint() || newPenalty > oldPenalty) {
-                // undo the interchange
+                int oldPenalty = solution.calculatePenalty();
                 kempeChain.interchange();
-                continue;
-            }
+                int newPenalty = solution.calculatePenalty();
 
-            i++;
+                if (!solution.maintainsHardConstraint() || newPenalty > oldPenalty) {
+                    // undo the interchange
+                    kempeChain.interchange();
+                }
+            }
         }
 
         return solution;

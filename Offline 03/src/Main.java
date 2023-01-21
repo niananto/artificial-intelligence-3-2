@@ -3,11 +3,13 @@ import Classes.ConstructiveHeuristic.*;
 import Classes.PerturbativeHeuristic.IPH;
 import Classes.PerturbativeHeuristic.KempeChainInterchange;
 import Classes.PerturbativeHeuristic.PairSwapOperator;
+import Classes.Random;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+
 
 public class Main {
     private static void solveToronto(String crsFile, String stuFile) {
@@ -59,9 +61,9 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        ICH ich = new LargestDegree(nodes.values());
+//        ICH ich = new LargestDegree(nodes.values());
 //        ICH ich = new SaturationDegree(nodes.values());
-//        ICH ich = new LargestEnrollment(nodes.values());
+        ICH ich = new LargestEnrollment(nodes.values());
 //        ICH ich = new RandomOrdering(nodes.values());
 
         // run constructive heuristic
@@ -83,10 +85,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        solveToronto("Toronto/car-f-92.crs", "Toronto/car-f-92.stu");
+        Random.setSeed(1805093);
+
+//        solveToronto("Toronto/car-f-92.crs", "Toronto/car-f-92.stu");
         solveToronto("Toronto/car-s-91.crs", "Toronto/car-s-91.stu");
-        solveToronto("Toronto/kfu-s-93.crs", "Toronto/kfu-s-93.stu");
-        solveToronto("Toronto/tre-s-92.crs", "Toronto/tre-s-92.stu");
-        solveToronto("Toronto/yor-f-83.crs", "Toronto/yor-f-83.stu");
+//        solveToronto("Toronto/kfu-s-93.crs", "Toronto/kfu-s-93.stu");
+//        solveToronto("Toronto/tre-s-92.crs", "Toronto/tre-s-92.stu");
+//        solveToronto("Toronto/yor-f-83.crs", "Toronto/yor-f-83.stu");
     }
 }
