@@ -4,10 +4,11 @@ import Classes.Node;
 import Classes.Solution;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class KempeChainInterchange implements IPH {
     private final Solution solution;
-    private final ArrayList<KempeChain> kempeChains;
+    private final List<KempeChain> kempeChains;
 
     public KempeChainInterchange(Solution prevSolution) {
         this.solution = new Solution(prevSolution);
@@ -29,20 +30,22 @@ public class KempeChainInterchange implements IPH {
             }
         }
 
-        // should run kempe chain minimum 1000 times as long as it is reducing penalty)
-        for (int i=0; i<1000; i++) {
-            // Take a particular Kempe chain and swap the colors of all vertices
+        // should run kempe chain interchange minimum 1000 times as long as it is reducing penalty)
+        for (int i=0; i<5; ) {
+            // Take a particular kempe chain and swap the colors of all vertices
             KempeChain kempeChain = kempeChains.get((int) (Math.random() * kempeChains.size()));
 
             int oldPenalty = solution.calculatePenalty();
             kempeChain.interchange();
             int newPenalty = solution.calculatePenalty();
 
-            if (newPenalty >= oldPenalty) {
+            if (!solution.maintainsHardConstraint() || newPenalty > oldPenalty) {
                 // undo the interchange
                 kempeChain.interchange();
-                // break;
+                continue;
             }
+
+            i++;
         }
 
         return solution;

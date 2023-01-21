@@ -19,6 +19,10 @@ public class Edge {
         }
     }
 
+    public boolean maintainsHardConstraint() {
+        return node1.getTimeSlot() != node2.getTimeSlot();
+    }
+
     public int calculatePenalty() {
         int penalty = -1;
         if (node1.hasTimeSlot() && node2.hasTimeSlot()) {

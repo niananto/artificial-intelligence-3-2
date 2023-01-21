@@ -25,6 +25,13 @@ public class Solution {
         this.timeSlotCount = solution.timeSlotCount;
     }
 
+    public boolean maintainsHardConstraint() {
+        for (Edge edge : edges) {
+            if (!edge.maintainsHardConstraint()) return false;
+        }
+        return true;
+    }
+
     public void setTimeSlotCount(int timeSlotCount) {
         this.timeSlotCount = timeSlotCount;
     }
@@ -51,8 +58,8 @@ public class Solution {
     }
 
     public void printSolution() {
-        System.out.println("timeslots: " + timeSlotCount);
-        System.out.println("penalty: " + ((double)calculatePenalty() / (double)studentCount));
+        System.out.println("\ttimeslots: " + timeSlotCount);
+        System.out.println("\tpenalty: " + ((double)calculatePenalty() / (double)studentCount));
     }
 
     public void printSchedule() {
