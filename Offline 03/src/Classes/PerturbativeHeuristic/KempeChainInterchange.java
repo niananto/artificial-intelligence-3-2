@@ -6,11 +6,11 @@ import Classes.Solution;
 import java.util.ArrayList;
 
 public class KempeChainInterchange implements IPH {
-    private Solution solution;
-    private ArrayList<KempeChain> kempeChains;
+    private final Solution solution;
+    private final ArrayList<KempeChain> kempeChains;
 
     public KempeChainInterchange(Solution prevSolution) {
-        this.solution = prevSolution;
+        this.solution = new Solution(prevSolution);
         this.kempeChains = new ArrayList<>();
     }
 
@@ -38,7 +38,11 @@ public class KempeChainInterchange implements IPH {
             kempeChain.interchange();
             int newPenalty = solution.calculatePenalty();
 
-            if (newPenalty >= oldPenalty) break;
+            if (newPenalty >= oldPenalty) {
+                // undo the interchange
+                kempeChain.interchange();
+                // break;
+            }
         }
 
         return solution;

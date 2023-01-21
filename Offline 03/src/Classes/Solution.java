@@ -1,6 +1,8 @@
 package Classes;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 public class Solution {
     private final int studentCount;
@@ -14,6 +16,13 @@ public class Solution {
         this.nodes = nodes;
 
         this.timeSlotCount = -1;
+    }
+
+    public Solution(Solution solution) {
+        this.studentCount = solution.studentCount;
+        this.edges = new ArrayList<>(solution.edges);
+        this.nodes = new HashSet<>(solution.nodes);
+        this.timeSlotCount = solution.timeSlotCount;
     }
 
     public void setTimeSlotCount(int timeSlotCount) {
