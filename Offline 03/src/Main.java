@@ -62,8 +62,8 @@ public class Main {
         }
 
 //        ICH ich = new LargestDegree(nodes.values());
-//        ICH ich = new SaturationDegree(nodes.values());
-        ICH ich = new LargestEnrollment(nodes.values());
+        ICH ich = new SaturationDegree(nodes.values());
+//        ICH ich = new LargestEnrollment(nodes.values());
 //        ICH ich = new RandomOrdering(nodes.values());
 
         // run constructive heuristic
@@ -88,9 +88,9 @@ public class Main {
         Random.setSeed(1805093);
 
 //        solveToronto("Toronto/car-f-92.crs", "Toronto/car-f-92.stu");
-        solveToronto("Toronto/car-s-91.crs", "Toronto/car-s-91.stu");
+//        solveToronto("Toronto/car-s-91.crs", "Toronto/car-s-91.stu");
 //        solveToronto("Toronto/kfu-s-93.crs", "Toronto/kfu-s-93.stu");
 //        solveToronto("Toronto/tre-s-92.crs", "Toronto/tre-s-92.stu");
-//        solveToronto("Toronto/yor-f-83.crs", "Toronto/yor-f-83.stu");
+        solveToronto("Toronto/yor-f-83.crs", "Toronto/yor-f-83.stu");
     }
 }

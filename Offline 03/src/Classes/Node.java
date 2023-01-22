@@ -62,8 +62,13 @@ public class Node {
         return saturationDegree;
     }
 
-    public void increaseSaturationDegree() {
-        saturationDegree++;
+    public void recalculateSaturationDegree() {
+        // saturation degree is number of unique timeslots
+        Set<Integer> timeslots = new HashSet<>();
+        for (Edge edge : edges) {
+            timeslots.add(edge.getOtherNode(this).getTimeSlot());
+        }
+        saturationDegree = timeslots.size();
     }
 
     public int getEnrollmentCount() {

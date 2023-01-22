@@ -47,7 +47,7 @@ public class SaturationDegree implements ICH {
         // update saturation degree of neighbours
         if (toBeReturned.hasNeighbour()) {
             for (Node neighbour : toBeReturned.getNeighbours()) {
-                neighbour.increaseSaturationDegree();
+                neighbour.recalculateSaturationDegree();
             }
         }
 
