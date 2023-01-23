@@ -1,0 +1,12 @@
+ICH: LargestDegree
+Dataset: tre-s-92
+After constructive heuristic:
+	timeslots: 24
+	penalty: 10.123394495412844
+After kempe-chain:
+	timeslots: 24
+	penalty: 8.370183486238533
+		Pair swappable count: 63
+After pair-swap:
+	timeslots: 24
+	penalty: 8.330733944954128

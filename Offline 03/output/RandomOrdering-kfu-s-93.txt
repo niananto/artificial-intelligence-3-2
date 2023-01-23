@@ -1,0 +1,12 @@
+ICH: RandomOrdering
+Dataset: kfu-s-93
+After constructive heuristic:
+	timeslots: 26
+	penalty: 20.597494858852123
+After kempe-chain:
+	timeslots: 26
+	penalty: 14.108431482520098
+		Pair swappable count: 221
+After pair-swap:
+	timeslots: 26
+	penalty: 12.86633015516919

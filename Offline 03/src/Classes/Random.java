@@ -7,6 +7,7 @@ public class Random {
     }
 
     public static double nextDouble() {
-        return random.nextDouble();
+//        return random.nextDouble();
+        return Math.random();
     }
 }

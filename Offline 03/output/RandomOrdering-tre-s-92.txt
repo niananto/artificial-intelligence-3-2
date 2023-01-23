@@ -1,0 +1,12 @@
+ICH: RandomOrdering
+Dataset: tre-s-92
+After constructive heuristic:
+	timeslots: 28
+	penalty: 8.46697247706422
+After kempe-chain:
+	timeslots: 28
+	penalty: 7.28394495412844
+		Pair swappable count: 77
+After pair-swap:
+	timeslots: 28
+	penalty: 7.064678899082569

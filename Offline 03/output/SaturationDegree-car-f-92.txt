@@ -1,0 +1,12 @@
+ICH: SaturationDegree
+Dataset: car-f-92
+After constructive heuristic:
+	timeslots: 29
+	penalty: 6.66203376947717
+After kempe-chain:
+	timeslots: 29
+	penalty: 5.545252185243498
+		Pair swappable count: 53
+After pair-swap:
+	timeslots: 29
+	penalty: 5.504859112872577

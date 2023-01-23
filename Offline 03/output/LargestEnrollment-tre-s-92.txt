@@ -1,0 +1,12 @@
+ICH: LargestEnrollment
+Dataset: tre-s-92
+After constructive heuristic:
+	timeslots: 22
+	penalty: 16.41330275229358
+After kempe-chain:
+	timeslots: 22
+	penalty: 13.850917431192661
+		Pair swappable count: 71
+After pair-swap:
+	timeslots: 22
+	penalty: 13.685321100917431

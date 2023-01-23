@@ -5,14 +5,12 @@ import Classes.PerturbativeHeuristic.KempeChainInterchange;
 import Classes.PerturbativeHeuristic.PairSwapOperator;
 import Classes.Random;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 
 public class Main {
-    private static void solveToronto(String crsFile, String stuFile) {
+    private static void solveToronto(String crsFile, String stuFile) throws FileNotFoundException {
         HashMap<Integer, Node> nodes = new HashMap<>();
         ArrayList<Edge> edges = new ArrayList<>(); // taking arraylist to allow duplicates
         int studentCount = 0;
@@ -62,9 +60,17 @@ public class Main {
         }
 
 //        ICH ich = new LargestDegree(nodes.values());
-        ICH ich = new SaturationDegree(nodes.values());
-//        ICH ich = new LargestEnrollment(nodes.values());
+//        ICH ich = new SaturationDegree(nodes.values());
+        ICH ich = new LargestEnrollment(nodes.values());
 //        ICH ich = new RandomOrdering(nodes.values());
+
+        String s = crsFile.substring(8, crsFile.length() - 4);
+        PrintStream o = new PrintStream("output/" + ich.getClass().getSimpleName() + "-"
+                + s + ".txt");
+        System.setOut(o);
+
+        System.out.println("ICH: " + ich.getClass().getSimpleName());
+        System.out.println("Dataset: " + s);
 
         // run constructive heuristic
         Solver solver = new Solver(ich, studentCount, edges, nodes.values());
@@ -73,18 +79,18 @@ public class Main {
         solution.printSolution();
 
         // run local search (perturbation)
-        IPH iph = new KempeChainInterchange(solution);
-        solution = iph.runPerturbation();
+        IPH iph1 = new KempeChainInterchange(solution);
+        solution = iph1.runPerturbation();
         System.out.println("After kempe-chain:");
         solution.printSolution();
 
-        iph = new PairSwapOperator(solution);
-        solution = iph.runPerturbation();
+        IPH iph2 = new PairSwapOperator(solution);
+        solution = iph2.runPerturbation();
         System.out.println("After pair-swap:");
         solution.printSolution();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Random.setSeed(1805093);
 
 //        solveToronto("Toronto/car-f-92.crs", "Toronto/car-f-92.stu");

@@ -1,0 +1,12 @@
+ICH: SaturationDegree
+Dataset: kfu-s-93
+After constructive heuristic:
+	timeslots: 20
+	penalty: 46.55561787249953
+After kempe-chain:
+	timeslots: 20
+	penalty: 25.872125630959058
+		Pair swappable count: 171
+After pair-swap:
+	timeslots: 20
+	penalty: 24.9472798653954

@@ -1,0 +1,12 @@
+ICH: LargestEnrollment
+Dataset: yor-f-83
+After constructive heuristic:
+	timeslots: 23
+	penalty: 40.69500531349628
+After kempe-chain:
+	timeslots: 23
+	penalty: 31.55154091392136
+		Pair swappable count: 43
+After pair-swap:
+	timeslots: 23
+	penalty: 31.247608926673752

@@ -1,0 +1,12 @@
+ICH: SaturationDegree
+Dataset: tre-s-92
+After constructive heuristic:
+	timeslots: 22
+	penalty: 16.005963302752292
+After kempe-chain:
+	timeslots: 22
+	penalty: 13.831192660550458
+		Pair swappable count: 75
+After pair-swap:
+	timeslots: 22
+	penalty: 13.805045871559633

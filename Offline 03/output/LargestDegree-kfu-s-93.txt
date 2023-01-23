@@ -1,0 +1,12 @@
+ICH: LargestDegree
+Dataset: kfu-s-93
+After constructive heuristic:
+	timeslots: 20
+	penalty: 46.504954197046175
+After kempe-chain:
+	timeslots: 20
+	penalty: 35.84969153112731
+		Pair swappable count: 182
+After pair-swap:
+	timeslots: 20
+	penalty: 26.548139839222284

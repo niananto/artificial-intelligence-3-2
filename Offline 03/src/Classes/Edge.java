@@ -28,7 +28,10 @@ public class Edge {
         if (node1.hasTimeSlot() && node2.hasTimeSlot()) {
             int n = Math.abs(node1.getTimeSlot() - node2.getTimeSlot());
             if (n <= 5) {
-                penalty = (int) Math.pow(2, 5 - n);
+                // Exponential penalty
+//                penalty = (int) Math.pow(2, 5 - n);
+                // Linear penalty
+                penalty = 2 * (5 - n);
             } else {
                 penalty = 0;
             }

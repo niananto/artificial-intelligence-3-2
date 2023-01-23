@@ -18,7 +18,7 @@ public class KempeChainInterchange implements IPH {
     public Solution runPerturbation() {
         // should run kempe chain interchange minimum 1000 times
         // as long as it is reducing penalty
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<1000; i++) {
             // take a random node
             // make the kempe chain from that
             // interchange the kempe chain

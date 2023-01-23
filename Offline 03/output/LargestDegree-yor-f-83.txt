@@ -1,0 +1,12 @@
+ICH: LargestDegree
+Dataset: yor-f-83
+After constructive heuristic:
+	timeslots: 23
+	penalty: 40.89691817215728
+After kempe-chain:
+	timeslots: 23
+	penalty: 32.20403825717322
+		Pair swappable count: 36
+After pair-swap:
+	timeslots: 23
+	penalty: 32.33581296493092

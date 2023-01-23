@@ -1,0 +1,12 @@
+ICH: RandomOrdering
+Dataset: yor-f-83
+After constructive heuristic:
+	timeslots: 28
+	penalty: 49.83315621679065
+After kempe-chain:
+	timeslots: 28
+	penalty: 42.39638682252922
+		Pair swappable count: 44
+After pair-swap:
+	timeslots: 28
+	penalty: 41.99256110520723

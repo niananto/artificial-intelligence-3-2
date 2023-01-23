@@ -1,0 +1,12 @@
+ICH: LargestEnrollment
+Dataset: car-s-91
+After constructive heuristic:
+	timeslots: 36
+	penalty: 13.780206794682423
+After kempe-chain:
+	timeslots: 36
+	penalty: 8.331107828655835
+		Pair swappable count: 61
+After pair-swap:
+	timeslots: 36
+	penalty: 8.328626292466765

@@ -1,0 +1,12 @@
+ICH: SaturationDegree
+Dataset: yor-f-83
+After constructive heuristic:
+	timeslots: 21
+	penalty: 60.82465462274176
+After kempe-chain:
+	timeslots: 21
+	penalty: 58.07332624867163
+		Pair swappable count: 44
+After pair-swap:
+	timeslots: 21
+	penalty: 58.07332624867163

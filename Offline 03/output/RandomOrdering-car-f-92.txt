@@ -1,0 +1,12 @@
+ICH: RandomOrdering
+Dataset: car-f-92
+After constructive heuristic:
+	timeslots: 45
+	penalty: 4.773657636136598
+After kempe-chain:
+	timeslots: 45
+	penalty: 3.8349530376241923
+		Pair swappable count: 88
+After pair-swap:
+	timeslots: 45
+	penalty: 3.794559965253271

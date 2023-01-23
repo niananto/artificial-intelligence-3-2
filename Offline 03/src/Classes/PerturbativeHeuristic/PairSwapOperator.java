@@ -40,7 +40,7 @@ public class PairSwapOperator implements IPH {
             }
         }
 
-//        System.out.println("\t\tPair swappable count: " + pairSwappableCount);
+        System.out.println("\t\tPair swappable count: " + pairSwappableCount);
         return solution;
     }
 }

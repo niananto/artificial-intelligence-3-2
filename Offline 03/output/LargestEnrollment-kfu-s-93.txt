@@ -1,0 +1,12 @@
+ICH: LargestEnrollment
+Dataset: kfu-s-93
+After constructive heuristic:
+	timeslots: 21
+	penalty: 54.519162460272945
+After kempe-chain:
+	timeslots: 21
+	penalty: 25.73546457281735
+		Pair swappable count: 185
+After pair-swap:
+	timeslots: 21
+	penalty: 23.749111983548328

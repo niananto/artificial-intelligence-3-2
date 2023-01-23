@@ -1,0 +1,12 @@
+ICH: LargestDegree
+Dataset: car-f-92
+After constructive heuristic:
+	timeslots: 32
+	penalty: 6.678755632770509
+After kempe-chain:
+	timeslots: 32
+	penalty: 4.523372604375917
+		Pair swappable count: 48
+After pair-swap:
+	timeslots: 32
+	penalty: 4.526630110212281
